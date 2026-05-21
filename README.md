@@ -1,9 +1,9 @@
 <div align="center">
   <img align="center" src=".github/images/logo.png" height="400" />
-  <h1 align="center">Pip-Boy 3000a Holotapes</h1>
+  <h1 align="center">Pip-Boy 3000 Holotapes</h1>
   <p align="center">
     A community driven repository of custom applications and games for the 
-    <a href="https://www.thewandcompany.com/pip-boy-3000/" target="_blank">Pip-Boy 3000a</a>, 
+    <a href="https://www.thewandcompany.com/pip-boy-3000/" target="_blank">Pip-Boy 3000</a>, 
     hosted on <a href="https://www.pip-boy.com/" target="_blank">pip-boy.com</a>.
   </p>
   <p align="center">
@@ -49,12 +49,11 @@
 
 ## Description <a name="description"></a>
 
-Pip-Boy 3000a Holotapes by the community, for the community.
+Pip-Boy 3000 Holotapes by the community, for the community.
 
 Install on: [pip-boy.com][link-pip-boy]
 
-Follow the guide below to create your own custom Holotapes for the Pip-Boy
-3000a!
+Follow the guide below to create your own custom Holotapes for the Pip-Boy 3000!
 
 <p align="right">[ <a href="#index">Index</a> ]</p>
 
@@ -356,7 +355,7 @@ Main rules:
 
 Notes:
 
-- The 3000a has about `6500` Espruino variable blocks available to JavaScript.
+- The 3000 has about `6500` Espruino variable blocks available to JavaScript.
 - Once an app is running, the OS uses around `1700`, leaving about `4600` for
   the app.
 - For example, Atomic Command was mentioned as using around `3000`.
@@ -391,12 +390,12 @@ print(E.getSizeOf(this['\xFF'], 1).sort((a, b) => a.size - b.size));
 
 1.  Fork the repository:
 
-    https://github.com/CodyTolene/pip-boy-3000a-holotapes/fork
+    https://github.com/CodyTolene/pip-boy-3000-holotapes/fork
 
 2.  Clone your forked repository:
 
     ```sh
-    git clone https://github.com/<my-username>/pip-boy-3000a-holotapes.git
+    git clone https://github.com/<my-username>/pip-boy-3000-holotapes.git
     ```
 
     > ![Info][img-info] Replace `<my-username>` with your own GitHub username.
@@ -441,7 +440,7 @@ print(E.getSizeOf(this['\xFF'], 1).sort((a, b) => a.size - b.size));
 
 8.  Create a pull request on GitHub to merge your changes into the main branch:
 
-        https://github.com/CodyTolene/pip-boy-3000a-holotapes/pulls
+        https://github.com/CodyTolene/pip-boy-3000-holotapes/pulls
 
     </details>
 

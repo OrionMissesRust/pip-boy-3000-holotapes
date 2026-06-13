@@ -8,10 +8,10 @@
 
 ### Description
 
-PipMan is a Pac-Man inspired arcade game built for the Pip-Boy 3000, 
-blending retro gaming nostalgia with the iconic wasteland aesthetic. 
-Navigate the vault, dodge ghouls, and collect every bottle cap
-all from the wrist-mounted terminal of the Commonwealth.
+PipMan is a Pac-Man inspired arcade game built for the Pip-Boy 3000, blending
+retro gaming nostalgia with the iconic wasteland aesthetic. Navigate the vault,
+dodge ghouls, and collect every bottle cap all from the wrist-mounted terminal
+of the Commonwealth.
 
 ### Controls
 

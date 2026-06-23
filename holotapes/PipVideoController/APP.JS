@@ -7,9 +7,12 @@
   let redrawInterval;
   let removed = false;
 
+  const VISIBLE_COUNT = 7;
+
   const state = {
     phase: 'WAITING', // "WAITING" or "LIST"
     selectedIndex: 0,
+    windowStart: 0,
   };
 
   function mark() {
@@ -30,16 +33,32 @@
       h.drawString('SYSTEM READY', 240, 110);
       h.drawString('PRESS SELECT TO SYNC', 240, 140);
     } else if (state.phase === 'LIST') {
-      h.setFontMonofonto18().setFontAlign(-1, -1); // Left alignment for lists
+      h.setFontMonofonto18().setFontAlign(-1, -1);
 
-      videoList.forEach(function (v, i) {
-        let y = 75 + i * 30;
-        if (i === state.selectedIndex) {
+      // --- DRAW TOP SCROLL INDICATOR ---
+      if (state.windowStart > 0) {
+        h.drawString('▲ More Videos Above', 40, 60);
+      }
+
+      // Draw items within our visible window frame
+      for (let i = 0; i < VISIBLE_COUNT; i++) {
+        let itemIndex = state.windowStart + i;
+        if (itemIndex >= videoList.length) break;
+
+        let v = videoList[itemIndex];
+
+        let y = state.windowStart > 0 ? 85 + i * 26 : 70 + i * 26;
+
+        if (itemIndex === state.selectedIndex) {
           h.drawString('> [ ' + v.name + ' ]', 25, y);
         } else {
           h.drawString('  ' + v.name, 25, y);
         }
-      });
+      }
+
+      if (state.windowStart + VISIBLE_COUNT < videoList.length) {
+        h.drawString('▼ More Videos Below', 40, 270);
+      }
     }
   }
 
@@ -65,9 +84,17 @@
     } else if (state.phase === 'LIST') {
       if (dir < 0 && state.selectedIndex > 0) {
         state.selectedIndex--;
+
+        if (state.selectedIndex < state.windowStart) {
+          state.windowStart = state.selectedIndex;
+        }
         mark();
       } else if (dir > 0 && state.selectedIndex < videoList.length - 1) {
         state.selectedIndex++;
+
+        if (state.selectedIndex >= state.windowStart + VISIBLE_COUNT) {
+          state.windowStart = state.selectedIndex - VISIBLE_COUNT + 1;
+        }
         mark();
       }
     }

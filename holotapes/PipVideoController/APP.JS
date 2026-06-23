@@ -100,9 +100,6 @@
     }
   }
 
-  h.clear();
-  if (Pip.audioStop) Pip.audioStop();
-
   Pip.onExclusive('knob1', onLeftWheel);
 
   draw();
@@ -118,7 +115,6 @@
 
       if (redrawInterval) clearInterval(redrawInterval);
       Pip.removeListener('knob1', onLeftWheel);
-      if (Pip.audioStop) Pip.audioStop();
     },
   };
 });

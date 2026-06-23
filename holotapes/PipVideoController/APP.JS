@@ -1,8 +1,4 @@
 (function () {
-  const APP_ID = 'PIPVIDEOCONTROLLER';
-  const W = h.getWidth();
-  const H = h.getHeight();
-
   // --- VIDEO PLAYLIST ---
   const videoList = [
     // --- ADD VIDEOS HERE ---
@@ -10,7 +6,6 @@
 
   let redrawInterval;
   let removed = false;
-  let leftWheelPressWatch;
 
   const state = {
     phase: 'WAITING', // "WAITING" or "LIST"
@@ -25,18 +20,15 @@
   function draw() {
     h.clear(1);
 
-    h.setColor(3)
-      .setFontMonofonto28()
-      .setFontAlign(0, 0)
-      .drawString('PipVideoController', W / 2, 30);
+    h.setColor(3).setFontMonofonto28().setFontAlign(0, 0);
+    h.drawString('PipVideoController', 240, 30);
 
-    h.drawLine(0, 50, W, 50);
+    h.drawLine(0, 50, 480, 50);
 
     if (state.phase === 'WAITING') {
-      h.setFontMonofonto18()
-        .setFontAlign(0, 0)
-        .drawString('SYSTEM READY', W / 2, 110)
-        .drawString('PRESS SELECT TO SYNC', W / 2, 140);
+      h.setFontMonofonto18().setFontAlign(0, 0);
+      h.drawString('SYSTEM READY', 240, 110);
+      h.drawString('PRESS SELECT TO SYNC', 240, 140);
     } else if (state.phase === 'LIST') {
       h.setFontMonofonto18().setFontAlign(-1, -1); // Left alignment for lists
 
@@ -49,13 +41,28 @@
         }
       });
     }
-
-    h.flip();
-    if (typeof getTime !== 'undefined') Pip.lastFlip = getTime();
   }
 
   function onLeftWheel(dir) {
-    if (state.phase === 'LIST') {
+    if (dir === 0) {
+      if (state.phase === 'WAITING') {
+        USB.print('START_SELECT\n');
+        state.phase = 'LIST';
+        mark();
+      } else if (state.phase === 'LIST') {
+        let path = videoList[state.selectedIndex].path;
+        USB.print('PLAY:' + path + '\n');
+
+        h.clear(1);
+        h.setColor(3).setFontMonofonto18().setFontAlign(0, 0);
+        h.drawString('PLAYING...', 240, 136);
+        h.flip();
+
+        setTimeout(function () {
+          draw();
+        }, 1500);
+      }
+    } else if (state.phase === 'LIST') {
       if (dir < 0 && state.selectedIndex > 0) {
         state.selectedIndex--;
         mark();
@@ -66,74 +73,25 @@
     }
   }
 
-  function onRightWheel(dir) {
-    // Leave right wheel optional or unused
-  }
+  h.clear();
+  if (Pip.audioStop) Pip.audioStop();
 
-  function onLeftWheelPress() {
-    if (state.phase === 'WAITING') {
-      // 1. Handshake to PC
-      USB.print('START_SELECT\n');
-      state.phase = 'LIST';
-      mark();
-    } else if (state.phase === 'LIST') {
-      // 2. Send path to play
-      let path = videoList[state.selectedIndex].path;
-      USB.print('PLAY:' + path + '\n');
+  Pip.onExclusive('knob1', onLeftWheel);
 
-      h.clear(1);
-      h.setColor(3)
-        .setFontMonofonto18()
-        .setFontAlign(0, 0)
-        .drawString('PLAYING...', W / 2, H / 2);
-      h.flip();
-
-      setTimeout(function () {
-        draw();
-      }, 1500);
-    }
-  }
-
-  function start() {
-    h.clear();
-    if (Pip.audioStop) Pip.audioStop();
-
-    Pip.onExclusive('knob1', onLeftWheel);
-    Pip.onExclusive('knob2', onRightWheel);
-
-    if (typeof ENC1_PRESS !== 'undefined') {
-      leftWheelPressWatch = setWatch(onLeftWheelPress, ENC1_PRESS, {
-        repeat: true,
-        edge: 'rising',
-        debounce: 50,
-      });
-    }
-
-    draw();
-    redrawInterval = setInterval(draw, 1000);
-  }
-
-  function remove() {
-    if (removed) return;
-    removed = true;
-
-    if (redrawInterval) clearInterval(redrawInterval);
-    if (leftWheelPressWatch) clearWatch(leftWheelPressWatch);
-
-    Pip.removeListener('knob1', onLeftWheel);
-    Pip.removeListener('knob2', onRightWheel);
-
-    if (Pip.audioStop) Pip.audioStop();
-    h.clear();
-    h.flip();
-  }
-
-  start();
+  draw();
+  redrawInterval = setInterval(draw, 1000);
 
   return {
-    id: APP_ID,
+    id: 'PIPVIDEOCONTROLLER',
     notDefault: true,
     fullscreen: true,
-    remove: remove,
+    remove: function () {
+      if (removed) return;
+      removed = true;
+
+      if (redrawInterval) clearInterval(redrawInterval);
+      Pip.removeListener('knob1', onLeftWheel);
+      if (Pip.audioStop) Pip.audioStop();
+    },
   };
 });

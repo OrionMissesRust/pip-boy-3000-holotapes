@@ -3,7 +3,7 @@
   "name": "PipVideoController",
   "author": "@OrionMissesRust",
   "version": "1.0.0",
-  "description": "Play videos using your pip-boy on your pc.",
+  "description": "Play videos on your pc using your Pip-Boy!",
   "icon": "assets/icon.png",
   "previews": [],
   "type": "app",

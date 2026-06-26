@@ -326,6 +326,24 @@
     "storageOptional": []
   },
   {
+    "id": "pipchess",
+    "name": "PipChess",
+    "author": "@OrionMissesRust",
+    "version": "1.0.0",
+    "description": "Chess on the Pip-Boy!",
+    "icon": "Pip Chess/assets/icon.png",
+    "previews": [],
+    "type": "game",
+    "readme": "Pip Chess/README.md",
+    "storage": [
+      {
+        "name": "HOLO/PIPCHESS/APP.JS",
+        "url": "Pip Chess/app.min.js"
+      }
+    ],
+    "storageOptional": []
+  },
+  {
     "id": "pipman",
     "name": "PIPMAN",
     "author": "@McBeefy34",
@@ -407,7 +425,7 @@
     "name": "PipVideoController",
     "author": "@OrionMissesRust",
     "version": "1.0.0",
-    "description": "Play videos using your pip-boy on your pc.",
+    "description": "Play videos on your pc using your Pip-Boy!",
     "icon": "PipVideoController/assets/icon.png",
     "previews": [],
     "type": "app",

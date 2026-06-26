@@ -4,7 +4,7 @@
   "author": "@OrionMissesRust",
   "version": "1.0.0",
   "description": "Chess on the Pip-Boy!",
-  "icon": "assets/icon.png",
+  "icon": "assets/missing-icon.png",
   "previews": [],
   "type": "game",
   "readme": "README.md",

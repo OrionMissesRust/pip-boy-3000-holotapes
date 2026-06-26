@@ -334,7 +334,7 @@
     "author": "@OrionMissesRust",
     "version": "1.0.0",
     "description": "Chess on the Pip-Boy!",
-    "icon": "PipChess/assets/icon.png",
+    "icon": "PipChess/assets/missing-icon.png",
     "previews": [],
     "type": "game",
     "readme": "PipChess/README.md",

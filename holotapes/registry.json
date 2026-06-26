@@ -334,14 +334,14 @@
     "author": "@OrionMissesRust",
     "version": "1.0.0",
     "description": "Chess on the Pip-Boy!",
-    "icon": "Pip Chess/assets/icon.png",
+    "icon": "PipChess/assets/icon.png",
     "previews": [],
     "type": "game",
-    "readme": "Pip Chess/README.md",
+    "readme": "PipChess/README.md",
     "storage": [
       {
         "name": "HOLO/PIPCHESS/APP.JS",
-        "url": "Pip Chess/app.min.js"
+        "url": "PipChess/app.min.js"
       }
     ],
     "storageOptional": []

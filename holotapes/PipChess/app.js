@@ -936,7 +936,7 @@
   draw();
 
   instance = {
-    id: 'PIPCHESS',
+    id: 'pipchess',
     notDefault: true,
     fullscreen: true,
     remove: function () {
